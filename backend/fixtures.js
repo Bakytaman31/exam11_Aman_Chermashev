@@ -26,25 +26,19 @@ const run = async () => {
         password: 'johnDoe',
         phoneNumber: '+996 707 103 017',
         name: 'John Doe',
-        token:[function () {
-            User.generateToken()
-        }]
+        token: '5g3gvb3bg'
     }, {
         username: 'blackHunter',
         password: 'blackHunter',
         phoneNumber: '+996 700 100 217',
         name: 'Black Hunter',
-        token:[function () {
-            User.generateToken()
-        }]
+        token: 'yt7vvvvvv'
     }, {
         username: 'someuser',
         password: 'someuser',
         phoneNumber: '+996 500 104 267',
         name: 'Some User',
-        token:[function () {
-            User.generateToken()
-        }]
+        token:'vmfklmlkvmkrev333'
     });
 
     await Product.create({
@@ -52,19 +46,22 @@ const run = async () => {
         price: 500,
         category: bikes,
         image: 'fixtures/bike.jpg',
-        owner: user1
+        owner: user1,
+        description: 'Product1'
     }, {
         title: 'MacBook',
         price: 700,
         category: laptops,
-        image: 'fixtures/laptop.jpeg',
-        owner: user2
+        image: 'fixtures/laptop.jpg',
+        owner: user2,
+        description: 'Product2'
     }, {
         title: 'Xiaomi Mi 6X',
         price: 300,
         category: phones,
         image: 'fixtures/phone.jpg',
-        owner: user3
+        owner: user3,
+        description: 'Product3'
     });
 
     mongoose.connection.close();

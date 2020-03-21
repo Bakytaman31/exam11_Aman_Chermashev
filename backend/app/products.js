@@ -8,6 +8,7 @@ const config = require('../config');
 const auth = require('../middleware/auth');
 
 const Product = require('../models/Product');
+const Category = require('../models/Category');
 
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
@@ -29,7 +30,7 @@ router.get('/', async (req, res) => {
 
 router.get('/:id', async (req, res) => {
     try {
-        const product = await Product.findById(req.params.id);
+        const product = await Product.findOne({_id: req.params.id}).populate('category owner');
 
         if (!product) {
             return res.status(404).send({message: 'Not found'});
@@ -39,6 +40,15 @@ router.get('/:id', async (req, res) => {
     } catch (error) {
         res.status(404).send({message: 'Not found'});
     }
+});
+
+router.get('/categories/:id', async (req, res) => {
+        try {
+            const products = await Product.find({category: req.params.id}).populate('category owner');
+            res.send(products);
+        } catch (error) {
+            res.status(400).send(error);
+        }
 });
 
 router.post('/', [auth, upload.single('image')], async (req, res) => {
@@ -66,7 +76,8 @@ router.post('/', [auth, upload.single('image')], async (req, res) => {
 router.delete('/:id', auth, async (req, res) => {
     try {
         const user = req.user;
-        Product.deleteOne({_id: req.body.id, owner: user._id});
+        console.log(user, req.params.id);
+        await Product.deleteOne({_id: req.params.id, owner: user._id});
         res.send("Deleted");
     } catch (error) {
         res.status(400).send(error);
