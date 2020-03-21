@@ -10,6 +10,7 @@ import {ConnectedRouter, connectRouter, routerMiddleware} from "connected-react-
 //local imports
 import usersReducer from "./store/reducers/userReducer";
 import productsReducer from "./store/reducers/productsReducer";
+import categoriesReducer from "./store/reducers/categoriesReducer";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import App from './App';
 
@@ -43,6 +44,7 @@ const rootReducer = combineReducers({
     router: connectRouter(history),
     users: usersReducer,
     products: productsReducer,
+    categories: categoriesReducer
 });
 
 const middleware = [

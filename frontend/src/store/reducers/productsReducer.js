@@ -2,7 +2,8 @@ import {GET_PRODUCT_SUCCESS, GET_PRODUCTS_SUCCESS} from "../actions/productsActi
 
 const initialState = {
     products: [],
-    product: null
+    product: null,
+    error: null
 };
 
 const productsReducer = (state = initialState, action) => {
